@@ -32,7 +32,7 @@ function createHealthIndicators(leftFighter, rightFighter) {
   return healthIndicators;
 }
 
-function createHealthIndicator(fighter, position) {
+export function createHealthIndicator(fighter, position) {
   const { name } = fighter;
   const container = createElement({ tagName: 'div', className: 'arena___fighter-indicator' });
   const fighterName = createElement({ tagName: 'span', className: 'arena___fighter-name' });
