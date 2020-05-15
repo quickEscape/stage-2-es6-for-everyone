@@ -14,9 +14,17 @@ function getModalContainer() {
 function createModal({ title, bodyElement, onClose }) {
   const layer = createElement({ tagName: 'div', className: 'modal-layer' });
   const modalContainer = createElement({ tagName: 'div', className: 'modal-root' });
+  const closeButton = createElement({ tagName: 'div', className: 'close-btn' });
   const header = createHeader(title, onClose);
 
-  modalContainer.append(header, bodyElement);
+  closeButton.innerText = '×';
+  const close = () => {
+    hideModal();
+    onClose();
+  }
+  closeButton.addEventListener('click', close);
+
+  modalContainer.append(closeButton, header, bodyElement);
   layer.append(modalContainer);
 
   return layer;
@@ -25,17 +33,10 @@ function createModal({ title, bodyElement, onClose }) {
 function createHeader(title, onClose) {
   const headerElement = createElement({ tagName: 'div', className: 'modal-header' });
   const titleElement = createElement({ tagName: 'span' });
-  const closeButton = createElement({ tagName: 'div', className: 'close-btn' });
   
   titleElement.innerText = title;
-  closeButton.innerText = '×';
   
-  const close = () => {
-    hideModal();
-    onClose();
-  }
-  closeButton.addEventListener('click', close);
-  headerElement.append(titleElement, closeButton);
+  headerElement.append(titleElement);
   
   return headerElement;
 }
