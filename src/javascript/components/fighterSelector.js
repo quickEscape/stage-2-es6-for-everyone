@@ -2,6 +2,7 @@ import { createElement } from '../helpers/domHelper';
 import { renderArena } from './arena';
 import versusImg from '../../../resources/versus.png';
 import { createFighterPreview } from './fighterPreview';
+import { fighterService } from '../services/fightersService';
 
 export function createFightersSelector() {
   let selectedFighters = [];
@@ -21,6 +22,16 @@ const fighterDetailsMap = new Map();
 
 export async function getFighterInfo(fighterId) {
   // get fighter info from fighterDetailsMap or from service and write it to fighterDetailsMap
+  try {
+    if (!fighterDetailsMap.has(fighterId)) {
+      const fighterDetails = await fighterService.getFighterDetails(fighterId);
+      fighterDetailsMap.set(fighterId, fighterDetails);
+    }
+
+    return fighterDetailsMap.get(fighterId);
+  } catch (error) {
+    throw error;
+  }
 }
 
 function renderSelectedFighters(selectedFighters) {
@@ -41,12 +52,12 @@ function createVersusBlock(selectedFighters) {
   const image = createElement({
     tagName: 'img',
     className: 'preview-container___versus-img',
-    attributes: { src: versusImg },
+    attributes: { src: versusImg }
   });
   const disabledBtn = canStartFight ? '' : 'disabled';
   const fightBtn = createElement({
     tagName: 'button',
-    className: `preview-container___fight-btn ${disabledBtn}`,
+    className: `preview-container___fight-btn ${disabledBtn}`
   });
 
   fightBtn.addEventListener('click', onClick, false);
