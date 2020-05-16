@@ -13,4 +13,6 @@ open http://localhost:8080/
 
 STREET FIGHTER 
 
-\* NOTE: worked only for QWERTY keyboards 
+\* NOTE: worked only for QWERTY keyboards
+
+https://street-fighter.quickescape.now.sh/
