@@ -9,3 +9,8 @@
 `npm run start`
 
 open http://localhost:8080/
+
+
+STREET FIGHTER 
+
+\* NOTE: worked only for QWERTY keyboards 
